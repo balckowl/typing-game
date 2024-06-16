@@ -1,7 +1,23 @@
-export default function Home() {
+import Link from "next/link";
+
+import { auth } from "../../auth";
+import Header from "./layout/header/header";
+
+export default async function Home() {
+  const session = await auth();
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      Hello World!
-    </main>
+    <div>
+      <Header />
+      {session?.user ?
+          // ログインしている場合 
+          <div>
+            <Link href="/myPage">マイページへ</Link>
+          </div>
+        :
+          <div>
+            サインインしてください。
+          </div>
+      }
+    </div>
   );
 }
