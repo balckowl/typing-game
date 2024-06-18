@@ -11,12 +11,12 @@ type Tech = {
 const TechsList = ({ currentTechsNum, techsList }: { currentTechsNum: Number, techsList: Tech[] }) => {
   return (
     <div>
-      {techsList.map((tech: Tech, index: number) => (
-        <div key={index}>
+      {techsList.map((tech: Tech, idx: number) => (
+        <div key={idx}>
           <div
-            className={cn("mb-4 p-4 rounded-md shadow-md h-[200px]", index == currentTechsNum ? "bg-orange-200" : "bg-white")}
+            className={cn("mb-4 p-4 rounded-md shadow-md h-[200px]", idx == currentTechsNum ? "bg-orange-200" : "bg-white")}
           >
-            <div className={cn("flex justify-between border-b-2 pb-2 mb-4", index == currentTechsNum && "border-black")}>
+            <div className={cn("flex justify-between border-b-2 pb-2 mb-4", idx == currentTechsNum && "border-black")}>
               <p className="font-bold">{tech.name}</p>
               <div className="flex gap-5">
                 <div className="transition-all hover:opacity-60">
@@ -29,7 +29,7 @@ const TechsList = ({ currentTechsNum, techsList }: { currentTechsNum: Number, te
             </div>
             <div className="mt-2 flex flex-wrap gap-2">
               {tech.techs.map((t, idx) => (
-                <div key={idx} className={cn("p-2 rounded-full", index == currentTechsNum ? "bg-white" : "bg-gray-200")}>
+                <div key={idx} className={cn("p-2 rounded-full", idx == currentTechsNum ? "bg-white" : "bg-gray-200")}>
                   {t}
                 </div>
               ))}
