@@ -20,7 +20,7 @@ const TechsSelection = ({ currentTechsNum, techsList }: TechListProps) => {
         
         <TechsList techsList={techsList} currentTechsNum={currentTechsNum}/>
         {/* 追加ボタン */}
-        <Link href="./select">
+        <Link href="/select">
           <div className="h-[100px] cursor-pointer rounded-md bg-gray-400 p-4 transition-all hover:opacity-80">
             <div className="flex h-full items-center justify-center text-3xl text-white">+</div>
           </div>
