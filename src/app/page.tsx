@@ -2,7 +2,6 @@ import Image from "next/image";
 
 import About from "./components/top/about/about";
 import HowToPlay from "./components/top/howToPlay/howToPlay";
-import StartButton from "./components/top/startButton";
 
 export default async function Home() {
   return (
@@ -17,7 +16,7 @@ export default async function Home() {
         />
         <About/>
         <HowToPlay />
-        <StartButton />
+        {/* <StartButton /> */}
       </div>
     </div>
   );

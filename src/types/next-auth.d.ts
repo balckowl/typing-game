@@ -1,3 +1,5 @@
+import NextAuth from 'next-auth';
+import { JWT } from 'next-auth/jwt';
 
 // Session型の拡張
 declare module 'next-auth' {
