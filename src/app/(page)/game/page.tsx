@@ -23,7 +23,7 @@ const Game = () => {
   const [score, setScore] = useState<number>(0);
 
   // 時間
-  const timeLimit = 60;
+  const timeLimit = 5;
 
   return (
     <div className="relative h-screen">
