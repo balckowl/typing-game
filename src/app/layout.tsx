@@ -3,6 +3,7 @@ import "./globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 
+import SessionProvider from "./components/auth/SessionProvider";
 import Footer from "./layout/footer/footer";
 import Header from "./layout/header/header";
 
@@ -20,13 +21,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ja">
-      <body className={inter.className}>
-        <Header/>
-        <main>
-          {children}
-        </main>
-        <Footer/>
-      </body>
+      <SessionProvider>
+        <body className={inter.className}>
+          <Header/>
+          <main>
+            {children}
+          </main>
+          <Footer/>
+        </body>
+      </SessionProvider>
     </html>
   );
 }
