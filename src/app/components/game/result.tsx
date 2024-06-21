@@ -100,12 +100,14 @@ const Result = ({
             {/* 1列目 */}
             <div className="flex w-full flex-wrap justify-between">
               <div className="w-[30%]">
+              <Link href="/myPage" className="block w-full">
                 <Button 
                   onClick={handleReset}
                   className="mx-2 h-max w-full grow bg-green-400 shadow-md hover:bg-green-600"
                 >
                   <p className="py-3 text-xl font-bold">やり直す</p>
                 </Button>
+              </Link>
               </div>
               <div className="w-[30%]">
                 <Link href="/myPage" className="block w-full">
@@ -125,7 +127,7 @@ const Result = ({
 
             {/* 2列目 */}
             <div className="flex w-full justify-end">
-              <Link href="/ranking">
+              <Link href="/rankingPage">
                 <Button className="bg-orange-700 py-0 shadow-md hover:bg-orange-900">
                   <p className="font-bold text-orange-100">ランキングを表示</p>
                 </Button>
