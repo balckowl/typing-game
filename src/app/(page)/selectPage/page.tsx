@@ -1,12 +1,10 @@
+"use client"
+import React, { useState } from "react";
+
 import AllTechsList from "@/app/components/selectPage/allTechListSection";
-import PresetListSection from "@/app/components/selectPage/presetListSection";
 import SubmitButton from "@/app/components/selectPage/submitButton";
 
-const selectPage = () => {
-  const presetSection = [
-    { name: "フロントエンド", techs: ["HTML/CSS", "JavaScript", "React"] },
-    { name: "バックエンド", techs: ["HTML/CSS", "JavaScript", "React"] },
-  ];
+const SelectPage = () => {
   const allSections = [
     {
       name: "web",
@@ -18,13 +16,31 @@ const selectPage = () => {
         "Vue",
         "Nuxt",
         "Firebase",
-        "Framer motion",
       ],
     },
     { name: "プログラミング言語", techs: ["C", "C++", "C#", "Python", "Rust"] },
     { name: "インフラ", techs: ["Docker", "AWS"] },
-    { name: "その他", techs: ["Git", "Unity", "競プロ"] },
+    { name: "その他", techs: ["Git", "Unity"] },
   ];
+
+  const [selectedTechs, setSelectedTechs] = useState<string[]>([]);
+
+  const handleTechClick = (tech: string) => {
+    setSelectedTechs((prevSelected) => {
+      if (prevSelected.includes(tech)) {
+        return prevSelected.filter((t) => t !== tech);
+      } else if (prevSelected.length < 5) {
+        return [...prevSelected, tech];
+      } else {
+        return prevSelected;
+      }
+    });
+  };
+
+  const handleSubmit = () => {
+    localStorage.setItem("selectedTechs", JSON.stringify(selectedTechs));
+    // ゲーム画面に遷移するロジックを追加
+  };
 
   return (
     <div className="mt-8">
@@ -34,19 +50,15 @@ const selectPage = () => {
         </h2>
         <AllTechsList
           allSections={allSections}
-        />
-      </div>
-      <div className="mx-[20%] mb-8 rounded-2xl bg-[#E8FBFF] p-4 shadow-md">
-        <h2 className="mb-4 text-2xl">あなたの技術プリセット</h2>
-        <PresetListSection
-          presetSection={presetSection}
+          onTechClick={handleTechClick}
+          selectedTechs={selectedTechs}
         />
       </div>
       <div className="mb-8 text-center">
-      <SubmitButton />
+        <SubmitButton onClick={handleSubmit} />
       </div>
     </div>
   );
 }
 
-export default selectPage;
+export default SelectPage;

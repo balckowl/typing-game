@@ -34,39 +34,42 @@ const Result = ({
   const typeErrorAdditional = Math.max(10 * Math.floor(500 - (typingErrorsCount ** 1.2 * 5)), 0);
   const lastScore = scoreAdditional + typeSpeedAdditional + typeErrorAdditional;
 
-  // // フォームの送信イベントハンドラ
-  // const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-  //   event.preventDefault(); // デフォルトのフォーム送信を防ぐ
+  // フォームの送信イベントハンドラ
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault(); // デフォルトのフォーム送信を防ぐ
 
-  //   if (isScoreSubmitted) return; // すでに送信されている場合は何もしない
+    if (isScoreSubmitted) return; // すでに送信されている場合は何もしない
 
-  //   const formData = new FormData(event.currentTarget);
+    const formData = new FormData(event.currentTarget);
 
-  //   try {
-  //     const response = await submitScore(formData); // サーバーアクションを直接呼び出す
+    try {
+      const response = await submitScore(formData); // サーバーアクションを直接呼び出す
 
-  //     if (response) {
-  //       console.log("スコアが正常に送信されました");
-  //       setIsScoreSubmitted(true); // スコア送信フラグを立てる
-  //     } else {
-  //       console.error("スコアの送信に失敗しました");
-  //     }
-  //   } catch (error) {
-  //     console.error("エラーが発生しました:", error);
-  //   }
-  // };
+      if (response) {
+        console.log("スコアが正常に送信されました");
+        setIsScoreSubmitted(true); // スコア送信フラグを立てる
+      } else {
+        console.error("スコアの送信に失敗しました");
+      }
+    } catch (error) {
+      console.error("エラーが発生しました:", error);
+    }
+  };
 
   // コンポーネントがマウントされた時に送信ボタンをクリックする
   useEffect(() => {
     if (submitButtonRef.current) {
       submitButtonRef.current.click();
     }
-  }, [submitButtonRef.current]);
+  }, []);
+
+  // localStorageから選択した技術を取得
+  const selectedTechs = typeof window !== 'undefined' ? JSON.parse(localStorage.getItem("selectedTechs") || "[]") : [];
 
   return (
     <div className="absolute inset-0 z-[100] flex items-center justify-center">
       <div className="z-[110] h-[70%] w-4/5 max-w-[700px] rounded-lg bg-white p-20 pt-10">
-        <form action={submitScore}>
+        <form onSubmit={handleSubmit}>
           {/* 加点情報 */}
           <div className="mb-20 flex flex-col">
             <Additional item={"スコア"} text={`${score}`} additionalPoint={scoreAdditional} />
@@ -90,6 +93,7 @@ const Result = ({
           {/* フォームデータの隠しフィールド */}
           <input type="hidden" name="userId" value="1" />
           <input type="hidden" name="score" value={lastScore.toString()} />
+          <input type="hidden" name="techs" value={selectedTechs.join(",")} />
 
           {/* ボタン */}
           <div className="flex flex-col gap-4">
@@ -130,7 +134,7 @@ const Result = ({
           </div>
 
           {/* 送信ボタン */}
-          <button type="submit" ref={submitButtonRef}>sousinn</button>
+          <button type="submit" ref={submitButtonRef}>送信</button>
         </form>
       </div>
 
