@@ -1,13 +1,6 @@
 import Profile from "@/app/components/myPage/profile/profile";
 import StartBtn from "@/app/components/myPage/startBtn";
-import TechsSelection from "@/app/components/myPage/techsSelection/techsSelection";
 import UserOverview from "@/app/components/myPage/userOverview";
-
-const currentTechsNum = 0;
-const techsList = [
-  { name: "フロントエンド", techs: ["HTML/CSS", "JavaScript", "React", "Vue", "Svelte"] },
-  { name: "バックエンド", techs: ["Node.js", "Express", "Django", "Ruby on Rails"] },
-];
 
 const myPage = () => {
   return (
@@ -22,7 +15,6 @@ const myPage = () => {
         </div>
         <div className="xl:mr-[100px]">
           <Profile displayName="くしらくしら" highScore={[25000, 3.0]} rank="B" progress={50} />
-          <TechsSelection techsList={techsList} currentTechsNum={currentTechsNum} />
         </div>
       </div>
 
