@@ -3,7 +3,6 @@ import prisma from "@/lib/prisma/db"
 type users = {
     id: number,
     name: string,
-    currTechsNum: number,
     experiencePoint: number,
     HighScore: number
   }

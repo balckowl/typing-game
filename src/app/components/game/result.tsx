@@ -34,39 +34,39 @@ const Result = ({
   const typeErrorAdditional = Math.max(10 * Math.floor(500 - (typingErrorsCount ** 1.2 * 5)), 0);
   const lastScore = scoreAdditional + typeSpeedAdditional + typeErrorAdditional;
 
-  // フォームの送信イベントハンドラ
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault(); // デフォルトのフォーム送信を防ぐ
+  // // フォームの送信イベントハンドラ
+  // const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+  //   event.preventDefault(); // デフォルトのフォーム送信を防ぐ
 
-    if (isScoreSubmitted) return; // すでに送信されている場合は何もしない
+  //   if (isScoreSubmitted) return; // すでに送信されている場合は何もしない
 
-    const formData = new FormData(event.currentTarget);
+  //   const formData = new FormData(event.currentTarget);
 
-    try {
-      const response = await submitScore(formData); // サーバーアクションを直接呼び出す
+  //   try {
+  //     const response = await submitScore(formData); // サーバーアクションを直接呼び出す
 
-      if (response) {
-        console.log("スコアが正常に送信されました");
-        setIsScoreSubmitted(true); // スコア送信フラグを立てる
-      } else {
-        console.error("スコアの送信に失敗しました");
-      }
-    } catch (error) {
-      console.error("エラーが発生しました:", error);
-    }
-  };
+  //     if (response) {
+  //       console.log("スコアが正常に送信されました");
+  //       setIsScoreSubmitted(true); // スコア送信フラグを立てる
+  //     } else {
+  //       console.error("スコアの送信に失敗しました");
+  //     }
+  //   } catch (error) {
+  //     console.error("エラーが発生しました:", error);
+  //   }
+  // };
 
   // コンポーネントがマウントされた時に送信ボタンをクリックする
   useEffect(() => {
     if (submitButtonRef.current) {
       submitButtonRef.current.click();
     }
-  }, []);
+  }, [submitButtonRef.current]);
 
   return (
     <div className="absolute inset-0 z-[100] flex items-center justify-center">
       <div className="z-[110] h-[70%] w-4/5 max-w-[700px] rounded-lg bg-white p-20 pt-10">
-        <form onSubmit={handleSubmit}>
+        <form action={submitScore}>
           {/* 加点情報 */}
           <div className="mb-20 flex flex-col">
             <Additional item={"スコア"} text={`${score}`} additionalPoint={scoreAdditional} />
@@ -130,7 +130,7 @@ const Result = ({
           </div>
 
           {/* 送信ボタン */}
-          <button type="submit" ref={submitButtonRef}></button>
+          <button type="submit" ref={submitButtonRef}>sousinn</button>
         </form>
       </div>
 
