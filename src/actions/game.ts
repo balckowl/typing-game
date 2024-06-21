@@ -2,9 +2,9 @@
 import prisma from "@/lib/prisma/db"
 
 export const submitScore = async (formData: FormData) => {
-  const userId =  123;
-  // parseInt(formData.get("userId") as string, 10)
+  const userId =  1;
   const score = parseInt(formData.get("score") as string, 10);
+  const techs = (formData.get("techs") as string).split(","); // techsフィールドを取得
 
   // ユーザーが存在するか確認
   const existingUser = await prisma.user.findUnique({
@@ -19,7 +19,7 @@ export const submitScore = async (formData: FormData) => {
   const gameEntry = await prisma.games.create({
     data: {
       score: score,
-      techs: [], // techsフィールドが必須なので、空の配列を設定しています。必要に応じて適切なデータを追加してください。
+      techs: techs, // 取得したtechsを設定
       userId: userId
     }
   });
