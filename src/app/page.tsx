@@ -11,7 +11,7 @@ export default async function Home() {
         <Image
           src="/Hero.webp"
           alt="High-tech computer setup"
-          className="h-[400px] w-full object-cover"
+          className="h-[80vh] w-full object-cover"
           width="1000"
           height="500"
         />
