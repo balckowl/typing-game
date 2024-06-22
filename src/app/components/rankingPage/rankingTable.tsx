@@ -1,16 +1,6 @@
+import { Games, User } from '@prisma/client';
+
 import ScoreRow from './scoreRow';
-
-type Score = {
-  name: string;
-  grade: string;
-  rank: number;
-  score: number;
-  techs: string[];
-}
-
-type RankingTableProps = {
-  scores: Score[];
-}
 
 type Header = {
   key: string;
@@ -25,7 +15,8 @@ const headers = [
   { key: 'grade', label: 'Grade' },
 ];
 
-const RankingTable  = ({scores}: RankingTableProps) => {
+const RankingTable = ({ games, user }: { games: (Games & { user: User })[], user: User }) => {
+
   return (
     <table className="min-w-full rounded-lg bg-white shadow-md">
       <thead>
@@ -38,8 +29,8 @@ const RankingTable  = ({scores}: RankingTableProps) => {
         </tr>
       </thead>
       <tbody>
-        {scores.map((score: Score) => (
-          <ScoreRow key={score.rank} score={score} />
+        {games.map((score: Games & {user: User}, index: number) => (
+          <ScoreRow key={score.id} score={score} user={user} index={index} />
         ))}
       </tbody>
     </table>
