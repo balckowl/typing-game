@@ -16,9 +16,10 @@ datasource db {
 model User {
   id              String  @id
   name            String
+  email           String
+  photoURL        String
   games           Games[]
-  HighScore       Int @default(0)
-  experiencePoint Int @default(0)
+  highScore       Int @default(0)
 }
 
 model Games {
