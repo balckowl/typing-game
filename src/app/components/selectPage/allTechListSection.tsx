@@ -9,7 +9,7 @@ type Tech = {
 
 const AllTechsList = ({ allSections, onTechClick, selectedTechs }: { allSections: Tech[], onTechClick: (tech: string) => void, selectedTechs: string[] }) => {
   return (
-    <div>
+    <div className="w-[1000px]">
       {allSections.map((tech: Tech, idx: number) => (
         <div key={idx}>
           <div className={cn("mb-4 p-4 h-fit bg-white")}>
