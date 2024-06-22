@@ -67,8 +67,8 @@ const Select = ({
 
   return (
     <div className="flex h-screen items-center justify-center">
-      <div className="mx-[20%] mb-8 rounded-2xl bg-white p-4 shadow-md">
-        <div className="flex w-[1000px] justify-between">
+      <div className="mb-8 max-w-[600px] rounded-2xl bg-white p-4 shadow-md">
+        <div className="flex justify-between">
 
         <h2 className="mb-4 text-2xl">
           好きな技術<span>(5つまで)</span>
