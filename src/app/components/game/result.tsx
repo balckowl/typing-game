@@ -49,7 +49,7 @@ const Result = ({
   const lastScore = scoreAdditional + typeSpeedAdditional + typeErrorAdditional;
 
   const submitScore = async() => {
-    await fetch("http://localhost:3000/api/score", {
+    await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/score`, {
       body: JSON.stringify({ lastScore, selectedTechs }),
       headers: {
         'Content-Type': 'application/json'
@@ -57,9 +57,11 @@ const Result = ({
       method: "POST",
     })
   }
+
   useEffect(() => {
     submitScore()
-  })
+  },[])
+
   return (
     <div className="absolute inset-0 z-[100] flex items-center justify-center">
       <div className="z-[110] h-[70%] w-4/5 max-w-[700px] rounded-lg bg-white p-20 pt-10">
