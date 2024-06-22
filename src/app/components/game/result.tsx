@@ -77,20 +77,20 @@ const Result = ({
                   onClick={handleReset}
                   className="mx-2 h-max w-full grow bg-green-400 shadow-md hover:bg-green-600"
                 >
-                  <p className="py-3 text-xl font-bold">やり直す</p>
+                  <p className="text-xl font-bold">やり直す</p>
                 </Button>
               </div>
               <div className="w-[30%]">
                 <Link href="/myPage" className="block w-full">
                   <Button className="mx-2 h-max w-full grow bg-red-400 shadow-md hover:bg-red-600">
-                    <p className="py-3 text-xl font-bold">マイページへ</p>
+                    <p className="text-xl font-bold">マイページへ</p>
                   </Button>
                 </Link>
               </div>
               <div className="w-[30%]">
                 <Link href="/myPage" className="block w-full">
                   <Button className="mx-2 h-max w-full grow shadow-md">
-                    <p className="py-3 text-xl font-bold">Xで共有</p>
+                    <p className="text-xl font-bold">Xで共有</p>
                   </Button>
                 </Link>
               </div>

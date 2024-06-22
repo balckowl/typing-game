@@ -66,7 +66,7 @@ const Select = ({
   };
 
   return (
-    <div className="flex h-[calc(100vh-80px-80px)] items-center justify-center">
+    <div className="flex h-screen items-center justify-center">
       <div className="mx-[20%] mb-8 rounded-2xl bg-white p-4 shadow-md">
         <div className="flex w-[1000px] justify-between">
 
@@ -76,7 +76,7 @@ const Select = ({
         <div>
         <Button 
           onClick={handleSubmit} 
-          className="h-16 w-[100px] rounded-xl bg-[#6AE88D] text-3xl text-white shadow-md"
+          className="w-[100px] rounded-xl bg-[#6AE88D] text-xl text-white shadow-md"
           disabled={selectedTechs.length == 0}
         >
           決定
