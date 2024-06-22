@@ -1,37 +1,50 @@
 "use client"
 import Link from "next/link"
-import { useRouter } from "next/navigation"
-import { useEffect, useRef,useState } from "react"
+import { Dispatch, SetStateAction, useEffect, useRef,useState } from "react"
 
 import { submitScore } from "@/actions/game"
 import { Button } from "@/components/ui/button"
 
 import Additional from "./additional"
 
-const Result = ({
-  score,
-  timeLimit,
-  typedLettersCount,
-  typingErrorsCount,
-}: {
+type ResultComponentProps = {
   score: number;
+  setCompletedWordsCount: Dispatch<SetStateAction<number>>;
+  setScene: Dispatch<SetStateAction<number>>;
+  setScore: Dispatch<SetStateAction<number>>;
+  setTypedLettersCount: Dispatch<SetStateAction<number>>;
+  setTypingErrorsCount: Dispatch<SetStateAction<number>>;
   timeLimit: number;
   typedLettersCount: number;
   typingErrorsCount: number;
-}) => {
+};
 
-  const router = useRouter();
+const Result = ({
+  score,
+  setCompletedWordsCount,
+  setScene,
+  setScore,
+  setTypedLettersCount,
+  setTypingErrorsCount,
+  timeLimit,
+  typedLettersCount,
+  typingErrorsCount,
+}: ResultComponentProps) => {
   const [isScoreSubmitted, setIsScoreSubmitted] = useState(false); // スコア送信のフラグ
   const submitButtonRef = useRef<HTMLButtonElement | null>(null); // 送信ボタンの参照を追加
 
   const handleReset = () => {
-    router.push("/game");
+    setScene(0)
+    setTypedLettersCount(0)
+    setTypingErrorsCount(0)
+    setCompletedWordsCount(0)
+    setScore(0)
   };
 
   // 加点
   const scoreAdditional = score;
-  const typeSpeedAdditional = Math.floor(typedLettersCount ** 1.3 / 10) * 10;
-  const typeErrorAdditional = Math.max(10 * Math.floor(500 - (typingErrorsCount ** 1.2 * 5)), 0);
+  const typeSpeedAdditional = Math.floor(typedLettersCount ** 1.7 / timeLimit * 5) * 10;
+  const typeErrorAdditional = Math.max(10 * Math.floor(1000 - (typingErrorsCount ** 1.2 * 5)), 0);
   const lastScore = scoreAdditional + typeSpeedAdditional + typeErrorAdditional;
 
   // フォームの送信イベントハンドラ
@@ -83,10 +96,7 @@ const Result = ({
               <div className="flex items-end">
                 <p className="pb-2">最終スコア</p>
               </div>
-              <div className="relative">
-                <p className="text-[40px] font-bold">{lastScore}</p>
-                <p className="absolute bottom-[-32px] text-yellow-500">High Score!!</p>
-              </div>
+              <p className="text-[40px] font-bold">{lastScore}</p>
             </div>
           </div>
 
@@ -100,14 +110,12 @@ const Result = ({
             {/* 1列目 */}
             <div className="flex w-full flex-wrap justify-between">
               <div className="w-[30%]">
-              <Link href="/myPage" className="block w-full">
                 <Button 
                   onClick={handleReset}
                   className="mx-2 h-max w-full grow bg-green-400 shadow-md hover:bg-green-600"
                 >
                   <p className="py-3 text-xl font-bold">やり直す</p>
                 </Button>
-              </Link>
               </div>
               <div className="w-[30%]">
                 <Link href="/myPage" className="block w-full">
@@ -136,7 +144,7 @@ const Result = ({
           </div>
 
           {/* 送信ボタン */}
-          <button type="submit" ref={submitButtonRef}>送信</button>
+          <button type="submit" ref={submitButtonRef}></button>
         </form>
       </div>
 

@@ -14,16 +14,16 @@ import { cn } from "@/lib/utils";
 const Profile = async ({ user }: { user: User }) => {
 
   const { name, highScore } = user
-  const rankScore = [0, 5000, 10000, 15000, 20000, 25000, 30000]
+  const rankScore = [0, 10000, 20000, 30000, 40000, 50000, 60000]
   const rankName = ["E","D","C","B","A","S","SS"]
   const ranks = [
-    ["SS", "30000~"],
-    ["S", "25000~"],
-    ["A", "20000~"],
-    ["B", "15000~"],
-    ["C", "10000~"],
-    ["D", "5000~"],
-    ["E", "0~"]
+    ["SS", `${rankName[6]}~`],
+    ["S", `${rankName[5]}~`],
+    ["A", `${rankName[4]}~`],
+    ["B", `${rankName[3]}~`],
+    ["C", `${rankName[2]}~`],
+    ["D", `${rankName[1]}~`],
+    ["E", `${rankName[0]}~`]
   ];
 
   const getRank = (score: number) => {

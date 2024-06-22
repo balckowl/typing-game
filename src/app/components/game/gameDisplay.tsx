@@ -14,6 +14,7 @@ type ResultProps = {
   completedWordsCount: number;
   isTypingSound: boolean;
   logoList: Logo[];
+  scene: number;
   score: number;
   setCompletedWordsCount: Dispatch<SetStateAction<number>>;
   setScene: Dispatch<SetStateAction<number>>;
@@ -30,6 +31,7 @@ const GameDisplay = ({
   completedWordsCount,
   isTypingSound,
   logoList,
+  scene,
   score,
   setCompletedWordsCount,
   setScene,
@@ -54,7 +56,7 @@ const GameDisplay = ({
 
   // 現在表示されている文字の配点
   const [currScoring, setCurrScoreing] = useState<number>(wordList[0].split("").length * 100);
-  
+
   // 定数
   // プログレスバーの最大文字数
   const progressMax = 40;
@@ -62,21 +64,23 @@ const GameDisplay = ({
 
   // タイム処理
   useEffect(() => {
-    const timerId = setInterval(() => {
-      setTimer(prevTimer => {
-        if (prevTimer === 1) {
-          clearInterval(timerId);
-          // タイマーが終了した後に状態を更新する
-          setTimeout(() => setScene(1), 0);
-          return 0;
-        } else {
-          return prevTimer - 1;
-        }
-      });
-    }, 1000);
+    if (scene == 1) {
+      const timerId = setInterval(() => {
+        setTimer(prevTimer => {
+          if (prevTimer === 1) {
+            clearInterval(timerId);
+            // タイマーが終了した後に状態を更新する
+            setTimeout(() => setScene(2), 0);
+            return 0;
+          } else {
+            return prevTimer - 1;
+          }
+        });
+      }, 1000);
 
-    // クリーンアップ関数
-    return () => clearInterval(timerId);
+      // クリーンアップ関数
+      return () => clearInterval(timerId);
+    }
   }, []);
 
   // タイピング処理
@@ -89,7 +93,7 @@ const GameDisplay = ({
 
   //連続正解文字数に応じてスコア加算の倍率が変わる
   const getScoreMultiplier = (correctSteak: number) => {
-    let scoreMultiplier:number = 1.0;
+    let scoreMultiplier: number = 1.0;
     if (correctSteak >= 40) {
       scoreMultiplier = 2.1;
     }
@@ -113,7 +117,7 @@ const GameDisplay = ({
   // タイプしたときの判定
   const isCorrectTypedLetter = (e: React.KeyboardEvent) => {
     // 制限時間後はキーを受け付けない
-    if(timer == 0){
+    if (timer == 0) {
       return
     }
 
@@ -150,7 +154,7 @@ const GameDisplay = ({
         setScore((prev: number) => prev + (currScoring * getScoreMultiplier(correctSteak + 1)))
       }
 
-    // 間違えた文字をタイプした時
+      // 間違えた文字をタイプした時
     } else {
       setTypingError(true)
       //間違えたのでリセット

@@ -3,8 +3,8 @@ import { Games, User } from '@prisma/client';
 import TechBadge from './techBadge';
 
 const ScoreRow = ({ index, score, user }: { index: number, score: Games & { user: User }, user: User }) => {
-  const rankScore = [0, 5000, 10000, 15000, 20000, 25000, 30000];
-  const rankName = ["E", "D", "C", "B", "A", "S", "SS"];
+  const rankScore = [0, 10000, 20000, 30000, 40000, 50000, 60000]
+  const rankName = ["E","D","C","B","A","S","SS"]
 
   const getRank = (score: number) => {
     for (let i = 1; i < rankScore.length; i++) {
