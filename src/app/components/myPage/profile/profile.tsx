@@ -8,10 +8,41 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog"
+import { Progress } from "@/components/ui/progress";
+import { cn } from "@/lib/utils";
 
 const Profile = async ({ user }: { user: User }) => {
 
   const { name, highScore } = user
+  const rankScore = [0, 5000, 10000, 15000, 20000, 25000, 30000]
+  const rankName = ["E","D","C","B","A","S","SS"]
+  const ranks = [
+    ["SS", "30000~"],
+    ["S", "25000~"],
+    ["A", "20000~"],
+    ["B", "15000~"],
+    ["C", "10000~"],
+    ["D", "5000~"],
+    ["E", "0~"]
+  ];
+
+  const getRank = (score: number) => {
+    for(let i=1; i<rankScore.length; i++){
+      if(score < rankScore[i]){
+        return rankName[i-1]
+      } 
+    }
+    return rankName[rankName.length-1]
+  }
+  
+  const getProgressWidth = (score :number) => {
+    for(let i=1; i < rankScore.length; i++){
+      if(score < rankScore[i]){
+        return (score - rankScore[i-1]) / (rankScore[i] - rankScore[i-1]) * 100
+      } 
+    }
+    return 100
+  }
 
   return (
     <div className="mx-auto min-w-[400px] max-w-[600px]">
@@ -36,8 +67,7 @@ const Profile = async ({ user }: { user: User }) => {
             </div>
           </div>
           <div className="w-1/2">
-            <p>{user.highScore}</p>
-            <p>{`(${highScore} keys / s)`}</p>
+            <p>{highScore}</p>
           </div>
         </div>
 
@@ -50,7 +80,7 @@ const Profile = async ({ user }: { user: User }) => {
           </div>
           <div className="w-1/2">
             <div className="flex justify-around">
-              <p className="text-[60px] font-bold">{highScore}</p>
+              <p className="text-[60px] font-bold">{getRank(highScore)}</p>
               <div className="relative">
                 <Dialog>
                   <DialogTrigger>
@@ -60,27 +90,29 @@ const Profile = async ({ user }: { user: User }) => {
                   </DialogTrigger>
                   <DialogContent>
                     <DialogHeader>
-                      <DialogTitle>
-                        現在の熟練度
+                      <DialogTitle className="mb-2">
+                        <p className="text-xl">ランク表</p>
                       </DialogTitle>
                       <DialogDescription>
-                        次のランクアップまで: 100 / 100
+                        {ranks.map((rank, index) => (
+                          <div className={cn("flex justify-between w-[60%] mx-auto p-4", index != ranks.length-1 && "border-b-[2px]")} key={index}>
+                            <div className="w-[80px]">
+                              <p className="text-lg">{rank[0]}</p>
+                            </div>
+                            <div className="w-[80px]">
+                              <p className="text-lg">{rank[1]}</p>
+                            </div>
+                          </div>
+                        ))}
                       </DialogDescription>
                     </DialogHeader>
                   </DialogContent>
                 </Dialog>
               </div>
-
             </div>
 
             {/* プログレスバー */}
-            <div className="relative ml-2 h-2 w-10/12 rounded-full bg-gray-300">
-              <div
-                className="absolute top-0 h-2 rounded-full bg-yellow-400"
-                style={{ width: `${highScore}%` }}
-              ></div>
-            </div>
-
+            <Progress value={getProgressWidth(highScore)} className="h-[10px]"/>
           </div>
         </div>
 
