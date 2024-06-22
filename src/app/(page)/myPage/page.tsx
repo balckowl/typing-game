@@ -25,7 +25,7 @@ const myPage = async () => {
   return (
     <div>
       <Header />
-      <div className="mx-auto h-[calc(100vh-80px-80px)] w-4/5">
+      <div className="mx-auto min-h-[calc(100vh-80px-80px)] w-4/5">
         {user && (
           <div className="flex flex-col justify-between lg:flex-row">
             <div className="hidden w-3/12 lg:block lg:pl-[100px]"></div>
