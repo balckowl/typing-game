@@ -179,7 +179,7 @@ const GameDisplay = ({
   }
 
   return (
-    <div className="flex h-full items-center">
+    <div className="flex h-screen items-center">
       <div className=" mx-auto flex h-[70vh] w-4/5 flex-col justify-between rounded">
         <div className="flex items-center justify-between p-3">
           {/* ゲーム情報 */}
