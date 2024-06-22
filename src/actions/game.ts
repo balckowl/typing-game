@@ -2,7 +2,7 @@
 import prisma from "@/lib/prisma/db"
 
 export const submitScore = async (formData: FormData) => {
-  const userId =  1;
+  const userId = "UAB3vQLe2mYouWu43s7nUAwGc1y2";
   const score = parseInt(formData.get("score") as string, 10);
   const techs = (formData.get("techs") as string).split(","); // techsフィールドを取得
 
@@ -25,9 +25,9 @@ export const submitScore = async (formData: FormData) => {
   });
 
   // 新しいスコアがハイスコアかどうかをチェックし、更新
-  if (score > existingUser.HighScore) {
+  if (score > existingUser.highScore) {
     await prisma.user.update({
-      data: { HighScore: score },
+      data: { highScore: score },
       where: { id: userId }
     });
   }

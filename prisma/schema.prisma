@@ -17,8 +17,7 @@ model User {
   id              String  @id
   name            String
   games           Games[]
-  HighScore       Int @default(0)
-  experiencePoint Int @default(0)
+  highScore       Int @default(0)
 }
 
 model Games {

@@ -3,7 +3,7 @@ CREATE TABLE "User" (
     "id" SERIAL NOT NULL,
     "name" TEXT NOT NULL,
     "currTechsNum" INTEGER NOT NULL,
-    "HighScore" INTEGER NOT NULL,
+    "highScore" INTEGER NOT NULL,
     "experiencePoint" INTEGER NOT NULL,
 
     CONSTRAINT "User_pkey" PRIMARY KEY ("id")
