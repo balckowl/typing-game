@@ -15,6 +15,7 @@ type ResultProps = {
   logoList: Logo[];
   scene: number;
   score: number;
+  selectedTechs: string[];
   setCompletedWordsCount: Dispatch<SetStateAction<number>>;
   setScene: Dispatch<SetStateAction<number>>;
   setScore: Dispatch<SetStateAction<number>>;
@@ -23,7 +24,7 @@ type ResultProps = {
   timeLimit: number;
   typedLettersCount: number;
   typingErrorsCount: number;
-  wordList: string[];
+  wordList: string[]
 }
 
 const GameDisplay = ({
@@ -31,6 +32,7 @@ const GameDisplay = ({
   logoList,
   scene,
   score,
+  selectedTechs,
   setCompletedWordsCount,
   setScene,
   setScore,
@@ -39,7 +41,7 @@ const GameDisplay = ({
   timeLimit,
   typedLettersCount,
   typingErrorsCount,
-  wordList,
+  wordList
 }: ResultProps) => {
 
   // 制限時間
@@ -68,7 +70,23 @@ const GameDisplay = ({
           if (prevTimer === 1) {
             clearInterval(timerId);
             // タイマーが終了した後に状態を更新する
-            setTimeout(() => setScene(2), 0);
+            setTimeout(async () => {
+
+              const scoreAdditional = score;
+              const typeSpeedAdditional = Math.floor(typedLettersCount ** 1.7 / timeLimit * 5) * 10;
+              const typeErrorAdditional = Math.max(10 * Math.floor(1000 - (typingErrorsCount ** 1.2 * 5)), 0);
+              const lastScore = scoreAdditional + typeSpeedAdditional + typeErrorAdditional;
+
+              await fetch("http://localhost:3000/api/score", {
+                body: JSON.stringify({ lastScore, selectedTechs }),
+                headers: {
+                  'Content-Type': 'application/json'
+                },
+                method: "POST",
+              })
+
+              setScene(2)
+            }, 0);
             return 0;
           } else {
             return prevTimer - 1;
