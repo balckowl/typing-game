@@ -18,11 +18,11 @@ type Header = {
 }
 
 const headers = [
-  { key: '', label: '' },
+  { key: 'rank', label: 'Rank' },
   { key: 'name', label: 'Name' },
   { key: 'techs', label: 'Techs' },
   { key: 'score', label: 'Score' },
-  { key: 'grade', label: 'Rank' },
+  { key: 'grade', label: 'Grade' },
 ];
 
 const RankingTable  = ({scores}: RankingTableProps) => {
