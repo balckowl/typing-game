@@ -12,7 +12,7 @@ export const createUser = async (id: string, name: string, email: string, photoU
         }
     })
 
-    console.log(user)
+    return user
 }
 
 
