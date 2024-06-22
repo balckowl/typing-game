@@ -14,18 +14,17 @@ datasource db {
 }
 
 model User {
-  id    Int    @id @default(autoincrement())
-  name String  @unique
-  games Games[]
-  currTechsNum Int
-  HighScore Int
-  experiencePoint  Int
+  id              String  @id
+  name            String
+  games           Games[]
+  HighScore       Int @default(0)
+  experiencePoint Int @default(0)
 }
 
 model Games {
-  id        Int     @id @default(autoincrement())
-  techs     String[]
-  score     Int
-  user      User @relation(fields: [userId], references: [id])
-  userId    Int
+  id     Int      @id @default(autoincrement())
+  techs  String[] @default(["html", "css", "js"])
+  score  Int      @default(0)
+  user   User     @relation(fields: [userId], references: [id])
+  userId String
 }
