@@ -4,7 +4,6 @@ import { doc, getDoc, setDoc } from "firebase/firestore"
 import Image from "next/image"
 import { signIn } from "next-auth/react"
 
-import { createUser } from "@/actions/user"
 import { Button } from "@/components/ui/button"
 import { auth, db } from "@/lib/firebase/client"
 
@@ -25,12 +24,21 @@ const SiginInWithGoogleBtn = () => {
             const userDoc = await getDoc(userDocRef);
 
             if (!userDoc.exists() && displayName && email && photoURL) {
+                //firestoreにデータを送信
                 await setDoc(userDocRef, {
                     name: displayName,
                     email: email,
                     photoURL: photoURL,
                 });
-                await createUser(uid, displayName, email, photoURL)
+
+                //supabaseに保存するため、サーバー側に送信
+                await fetch("http://localhost:3000/api/user", {
+                    body: JSON.stringify({ idToken }),
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    method: "POST"
+                })
             }
 
             signIn("credentials", { callbackUrl: '/myPage', idToken })
