@@ -26,8 +26,7 @@ const GameClient = () => {
   const [selectedTechs, setSelectedTechs] = useState<string[]>([]);
 
   return (
-    <div className="relative h-screen">
-      <div>{selectedTechs}</div>
+    <div className="h-full">
       {scene == 0 &&
         <Select 
           setScene={setScene}
@@ -57,17 +56,17 @@ const GameClient = () => {
       {/* リザルト */}
       {scene >= 2 &&
         <Result
-        //   timeLimit={timeLimit}
-        //   score={score}
-        //   typedLettersCount={typedLettersCount}
-        //   typingErrorsCount={typingErrorsCount}
-        //   setScene={setScene}
-        //   setTypedLettersCount={setTypedLettersCount}
-        //   setTypingErrorsCount={setTypingErrorsCount}
-        //   setCompletedWordsCount={setCompletedWordsCount}
-        //   setScore={setScore}
-        //   setSelectedTechs={setSelectedTechs}
-        //   selectedTechs={selectedTechs}
+          timeLimit={timeLimit}
+          score={score}
+          typedLettersCount={typedLettersCount}
+          typingErrorsCount={typingErrorsCount}
+          setScene={setScene}
+          setTypedLettersCount={setTypedLettersCount}
+          setTypingErrorsCount={setTypingErrorsCount}
+          setCompletedWordsCount={setCompletedWordsCount}
+          setScore={setScore}
+          setSelectedTechs={setSelectedTechs}
+          selectedTechs={selectedTechs}
         />
       }
 

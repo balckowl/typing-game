@@ -16,19 +16,35 @@ const Select = ({
 }) => {
   const allSections = [
     {
-      name: "web",
+      name: "フロントエンド",
       techs: [
         "HTML/CSS",
         "JavaScript",
+        "TypeScript",
         "React",
-        "Next",
+        "Next.js",
         "Vue",
-        "Nuxt",
-        "Firebase",
+        "Nuxt.js",
       ],
     },
-    { name: "プログラミング言語", techs: ["C", "C++", "C#", "Python", "Rust"] },
-    { name: "インフラ", techs: ["Docker", "AWS"] },
+    {
+      name: "バックエンド",
+      techs: [
+        "SQL",
+        "Go",
+        "Ruby",
+        "PHP",
+        "Laravel",
+        "Node.js",
+        "Nest.js","C",
+        "C++",
+        "C#",
+        "Python",
+        "Rust",
+        "Java",
+      ],
+    },
+    { name: "インフラ", techs: ["Docker", "AWS", "Azure"] },
     { name: "その他", techs: ["Git", "Unity"] },
   ];
 
@@ -50,25 +66,28 @@ const Select = ({
   };
 
   return (
-    <div className="mt-8">
+    <div className="flex h-[calc(100vh-80px-80px)] items-center justify-center">
       <div className="mx-[20%] mb-8 rounded-2xl bg-white p-4 shadow-md">
+        <div className="flex w-[1000px] justify-between">
+
         <h2 className="mb-4 text-2xl">
           好きな技術<span>(5つまで)</span>
         </h2>
+        <div>
+        <Button 
+          onClick={handleSubmit} 
+          className="h-16 w-[100px] rounded-xl bg-[#6AE88D] text-3xl text-white shadow-md"
+          disabled={selectedTechs.length == 0}
+        >
+          決定
+        </Button>
+        </div>
+      </div>
         <AllTechsList
           allSections={allSections}
           onTechClick={handleTechClick}
           selectedTechs={selectedTechs}
         />
-      </div>
-      <div className="mb-8 text-center">
-        <Button 
-          onClick={handleSubmit} 
-          className="h-20 w-[10%] rounded-xl bg-[#6AE88D] text-4xl text-white shadow-md"
-          disabled={selectedTechs.length == 0}
-        >
-          決定
-        </Button>
       </div>
     </div>
   );
