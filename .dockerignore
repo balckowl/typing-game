@@ -1,0 +1,6 @@
+.env.local
+.git
+.gitignore
+commitlint.config.js
+node_modules
+.eslintrc.json
