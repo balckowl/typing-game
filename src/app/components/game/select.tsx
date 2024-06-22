@@ -1,10 +1,19 @@
 "use client"
-import React, { Dispatch, SetStateAction, useState } from "react";
+import React, { Dispatch, SetStateAction } from "react";
+
+import { Button } from "@/components/ui/button";
 
 import AllTechsList from "../selectPage/allTechListSection";
-import SubmitButton from "../selectPage/submitButton";
 
-const Select = ({setScene} : {setScene: Dispatch<SetStateAction<number>>}) => {
+const Select = ({
+  selectedTechs,
+  setScene,
+  setSelectedTechs,
+}: {
+  selectedTechs: string[],
+  setScene: Dispatch<SetStateAction<number>>,
+  setSelectedTechs: Dispatch<SetStateAction<string[]>>,
+}) => {
   const allSections = [
     {
       name: "web",
@@ -23,8 +32,6 @@ const Select = ({setScene} : {setScene: Dispatch<SetStateAction<number>>}) => {
     { name: "その他", techs: ["Git", "Unity"] },
   ];
 
-  const [selectedTechs, setSelectedTechs] = useState<string[]>([]);
-
   const handleTechClick = (tech: string) => {
     setSelectedTechs((prevSelected) => {
       if (prevSelected.includes(tech)) {
@@ -36,9 +43,9 @@ const Select = ({setScene} : {setScene: Dispatch<SetStateAction<number>>}) => {
       }
     });
   };
-  
+
   const handleSubmit = () => {
-    // ゲーム画面に遷移するロジックを追加
+    // ゲーム画面に遷移する
     setScene(1);
   };
 
@@ -55,7 +62,13 @@ const Select = ({setScene} : {setScene: Dispatch<SetStateAction<number>>}) => {
         />
       </div>
       <div className="mb-8 text-center">
-        <SubmitButton onClick={handleSubmit} />
+        <Button 
+          onClick={handleSubmit} 
+          className="h-20 w-[10%] rounded-xl bg-[#6AE88D] text-4xl text-white shadow-md"
+          disabled={selectedTechs.length == 0}
+        >
+          決定
+        </Button>
       </div>
     </div>
   );
