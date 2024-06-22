@@ -16,11 +16,10 @@ const GameClient = () => {
   const [typingErrorsCount, setTypingErrorsCount] = useState<number>(0)
   const [completedWordsCount, setCompletedWordsCount] = useState<number>(0)
   const [wordList, setWordList] = useState<string[]>(["kusira"]);
-  const [logoList, setLogoList] = useState<Logo[]>([{ name: "next", logo: "./next.svg" }, { name: "next", logo: "./next.svg" }]);
   const [score, setScore] = useState<number>(0);
 
   // 制限時間
-  const timeLimit = 5;
+  const timeLimit = 60;
 
   // 技術リスト
   const [selectedTechs, setSelectedTechs] = useState<string[]>([]);
@@ -37,7 +36,6 @@ const GameClient = () => {
       {scene >= 1 &&
         <GameDisplay
         completedWordsCount={completedWordsCount}
-        logoList={logoList}
         scene={scene}
         score={score}
         setCompletedWordsCount={setCompletedWordsCount}

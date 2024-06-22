@@ -1,6 +1,6 @@
 "use client"
 import Link from "next/link"
-import { Dispatch, SetStateAction } from "react"
+import { Dispatch, SetStateAction, useEffect } from "react"
 
 import { Button } from "@/components/ui/button"
 
@@ -45,9 +45,21 @@ const Result = ({
 
   const scoreAdditional = score;
   const typeSpeedAdditional = Math.floor(typedLettersCount ** 1.7 / timeLimit * 5) * 10;
-  const typeErrorAdditional = Math.max(10 * Math.floor(1000 - (typingErrorsCount ** 1.2 * 5)), 0);
+  const typeErrorAdditional = Math.max(10 * Math.floor(200 * typedLettersCount / timeLimit - (typingErrorsCount ** 1.2 * 5)), 0);
   const lastScore = scoreAdditional + typeSpeedAdditional + typeErrorAdditional;
 
+  const submitScore = async() => {
+    await fetch("http://localhost:3000/api/score", {
+      body: JSON.stringify({ lastScore, selectedTechs }),
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      method: "POST",
+    })
+  }
+  useEffect(() => {
+    submitScore()
+  })
   return (
     <div className="absolute inset-0 z-[100] flex items-center justify-center">
       <div className="z-[110] h-[70%] w-4/5 max-w-[700px] rounded-lg bg-white p-20 pt-10">

@@ -1,18 +1,12 @@
 "use client"
 import { AnimatePresence, motion } from "framer-motion";
-import Image from "next/image";
 import { Dispatch, SetStateAction, useEffect, useRef, useState } from "react"
 
 import { Progress } from "@/components/ui/progress";
 
-type Logo = {
-  name: string;
-  logo: string;
-}
-
 type ResultProps = {
   completedWordsCount: number;
-  logoList: Logo[];
+
   scene: number;
   score: number;
   selectedTechs: string[];
@@ -29,7 +23,6 @@ type ResultProps = {
 
 const GameDisplay = ({
   completedWordsCount,
-  logoList,
   scene,
   score,
   selectedTechs,
@@ -71,20 +64,6 @@ const GameDisplay = ({
             clearInterval(timerId);
             // タイマーが終了した後に状態を更新する
             setTimeout(async () => {
-
-              const scoreAdditional = score;
-              const typeSpeedAdditional = Math.floor(typedLettersCount ** 1.7 / timeLimit * 5) * 10;
-              const typeErrorAdditional = Math.max(10 * Math.floor(1000 - (typingErrorsCount ** 1.2 * 5)), 0);
-              const lastScore = scoreAdditional + typeSpeedAdditional + typeErrorAdditional;
-
-              await fetch("http://localhost:3000/api/score", {
-                body: JSON.stringify({ lastScore, selectedTechs }),
-                headers: {
-                  'Content-Type': 'application/json'
-                },
-                method: "POST",
-              })
-
               setScene(2)
             }, 0);
             return 0;
@@ -178,8 +157,14 @@ const GameDisplay = ({
     }
   }
 
+  // クリック時に input にフォーカスを当てる
+  const handleFocus = () => {
+    inputRef.current?.focus();
+  };
+
+
   return (
-    <div className="flex h-screen items-center">
+    <div className="flex h-screen items-center"  onClick={handleFocus}>
       <div className=" mx-auto flex h-[70vh] w-4/5 flex-col justify-between rounded">
         <div className="flex items-center justify-between p-3">
           {/* ゲーム情報 */}
@@ -250,12 +235,9 @@ const GameDisplay = ({
 
         {/* 技術リスト */}
         <ul className="flex items-center gap-4 border-t border-black p-3">
-          {logoList.map((logo: Logo, idx: number) => (
+          {selectedTechs.map((tech: string, idx: number) => (
             <li key={idx} className="flex items-center gap-2">
-              <div>
-                <Image src={logo.logo} alt={logo.name} width={30} height={30} />
-              </div>
-              <p>{logo.name}</p>
+              <p className="cursor-pointer rounded-full bg-gray-200 p-2">{tech}</p>
             </li>
           ))}
         </ul>
