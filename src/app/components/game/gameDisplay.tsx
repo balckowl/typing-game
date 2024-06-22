@@ -12,7 +12,6 @@ type Logo = {
 
 type ResultProps = {
   completedWordsCount: number;
-  isTypingSound: boolean;
   logoList: Logo[];
   scene: number;
   score: number;
@@ -29,7 +28,6 @@ type ResultProps = {
 
 const GameDisplay = ({
   completedWordsCount,
-  isTypingSound,
   logoList,
   scene,
   score,
@@ -121,11 +119,9 @@ const GameDisplay = ({
       return
     }
 
-    //タイプ音がONかどうか
-    if (isTypingSound) {
-      // キーが押されたら音を鳴らす
-      typingSound.play()
-    }
+    // キーが押されたら音を鳴らす
+    typingSound.play()
+
 
     // 正しい文字をタイプした時
     if (e.key === letterArray[currentPosition]) {

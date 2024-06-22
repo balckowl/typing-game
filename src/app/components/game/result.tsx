@@ -9,9 +9,11 @@ import Additional from "./additional"
 
 type ResultComponentProps = {
   score: number;
+  selectedTechs: string[];
   setCompletedWordsCount: Dispatch<SetStateAction<number>>;
   setScene: Dispatch<SetStateAction<number>>;
   setScore: Dispatch<SetStateAction<number>>;
+  setSelectedTechs: Dispatch<SetStateAction<string[]>>;
   setTypedLettersCount: Dispatch<SetStateAction<number>>;
   setTypingErrorsCount: Dispatch<SetStateAction<number>>;
   timeLimit: number;
@@ -21,9 +23,11 @@ type ResultComponentProps = {
 
 const Result = ({
   score,
+  selectedTechs,
   setCompletedWordsCount,
   setScene,
   setScore,
+  setSelectedTechs,
   setTypedLettersCount,
   setTypingErrorsCount,
   timeLimit,
@@ -34,11 +38,12 @@ const Result = ({
   const submitButtonRef = useRef<HTMLButtonElement | null>(null); // 送信ボタンの参照を追加
 
   const handleReset = () => {
-    setScene(0)
-    setTypedLettersCount(0)
-    setTypingErrorsCount(0)
-    setCompletedWordsCount(0)
-    setScore(0)
+    setScene(0);
+    setTypedLettersCount(0);
+    setTypingErrorsCount(0);
+    setCompletedWordsCount(0);
+    setScore(0);
+    setSelectedTechs([]);
   };
 
   // 加点
@@ -50,14 +55,10 @@ const Result = ({
   // フォームの送信イベントハンドラ
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault(); // デフォルトのフォーム送信を防ぐ
-
     if (isScoreSubmitted) return; // すでに送信されている場合は何もしない
-
     const formData = new FormData(event.currentTarget);
-
     try {
       const response = await submitScore(formData); // サーバーアクションを直接呼び出す
-
       if (response) {
         console.log("スコアが正常に送信されました");
         setIsScoreSubmitted(true); // スコア送信フラグを立てる
@@ -75,9 +76,6 @@ const Result = ({
       submitButtonRef.current.click();
     }
   }, []);
-
-  // localStorageから選択した技術を取得
-  const selectedTechs = typeof window !== 'undefined' ? JSON.parse(localStorage.getItem("selectedTechs") || "[]") : [];
 
   return (
     <div className="absolute inset-0 z-[100] flex items-center justify-center">
