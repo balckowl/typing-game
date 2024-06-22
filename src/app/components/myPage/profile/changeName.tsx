@@ -1,20 +1,22 @@
-"use client"
-import { useState } from "react";
+import { Button } from "@/components/ui/button";
 
-const ChangeName = ({ displayName }: { displayName: string }) => {
-  const [name, setName] = useState(displayName);
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setName(e.target.value);
-  };
+
+const ChangeName = () => {
 
   return (
     <div>
-      <input
-        type="text"
-        value={name}
-        onChange={handleChange}
-        className="w-full rounded-md text-xl font-bold"
-      />
+      <form>
+        <input
+          type="text"
+          name="name"
+          className="w-full rounded-md text-xl font-bold"
+        />
+        <input
+          type="hidden"
+          name="id"
+        />
+        <Button>送信</Button>
+      </form>
     </div>
   )
 }

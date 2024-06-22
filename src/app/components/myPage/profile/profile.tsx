@@ -1,3 +1,5 @@
+import { User } from "@prisma/client";
+
 import {
   Dialog,
   DialogContent,
@@ -7,20 +9,14 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog"
 
-import ChangeName from "./changeName";
+const Profile = async ({ user }: { user: User }) => {
 
-type ProfileProps = {
-  displayName: string;
-  highScore: number[];
-  progress: number;
-  rank: string;
-}
+  const { name, highScore } = user
 
-const Profile = ({ displayName, highScore, progress, rank } : ProfileProps) => {
   return (
-    <div className="mx-auto max-w-[600px]">
+    <div className="mx-auto min-w-[400px] max-w-[600px]">
       <p className="mb-2 ml-2 text-xl font-bold">プロフィール</p>
-        <div className="mb-[50px] rounded-lg bg-green-100 p-6 shadow-lg xl:w-full">
+      <div className="mb-[50px] rounded-lg bg-green-100 p-6 shadow-lg xl:w-full">
 
         {/* 表示名 */}
         <div className="flex justify-between border-b-2 border-[#929292] py-[40px]">
@@ -28,7 +24,7 @@ const Profile = ({ displayName, highScore, progress, rank } : ProfileProps) => {
             <p>表示名</p>
           </div>
           <div className="w-1/2">
-            <ChangeName displayName={displayName}/>
+            <p>{name}</p>
           </div>
         </div>
 
@@ -40,8 +36,8 @@ const Profile = ({ displayName, highScore, progress, rank } : ProfileProps) => {
             </div>
           </div>
           <div className="w-1/2">
-            <p>{highScore[0]}</p>
-            <p>{`(${highScore[1].toFixed(1)} keys / s)`}</p>
+            <p>{user.highScore}</p>
+            <p>{`(${highScore} keys / s)`}</p>
           </div>
         </div>
 
@@ -54,7 +50,7 @@ const Profile = ({ displayName, highScore, progress, rank } : ProfileProps) => {
           </div>
           <div className="w-1/2">
             <div className="flex justify-around">
-              <p className="text-[60px] font-bold">{rank}</p>
+              <p className="text-[60px] font-bold">{highScore}</p>
               <div className="relative">
                 <Dialog>
                   <DialogTrigger>
@@ -81,7 +77,7 @@ const Profile = ({ displayName, highScore, progress, rank } : ProfileProps) => {
             <div className="relative ml-2 h-2 w-10/12 rounded-full bg-gray-300">
               <div
                 className="absolute top-0 h-2 rounded-full bg-yellow-400"
-                style={{ width: `${progress}%` }}
+                style={{ width: `${highScore}%` }}
               ></div>
             </div>
 

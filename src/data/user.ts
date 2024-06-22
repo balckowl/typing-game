@@ -7,14 +7,12 @@ type users = {
     HighScore: number
   }
 
-export const getAllUsers = async () => {
-    const users = await prisma.user.findMany()
-    const rankingData = users.map((user: users) => (
-        {
-            name: user.name,
-            HighScore: user.HighScore
-        }
-      ));
-    console.log(rankingData)
-    return rankingData;
+export const getUser = async (id: string) => {
+    const user = await prisma.user.findUnique({
+      where: {
+        id: id
+      }
+    })
+
+    return user
 }
