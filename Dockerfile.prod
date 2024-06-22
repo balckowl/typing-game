@@ -1,0 +1,32 @@
+# ベースイメージとしてNode.jsを使用
+FROM node:20.14.0-alpine3.20 AS builder
+
+# 作業ディレクトリを設定
+WORKDIR /app
+
+# パッケージファイルをコピーして依存関係をインストール
+COPY package.json package-lock.json ./
+RUN npm install
+
+# アプリケーションのソースコードをコピー
+COPY . .
+
+# Next.jsのビルド
+RUN npm run build
+
+# 本番環境用の軽量イメージを作成
+FROM node:14-alpine
+
+# 作業ディレクトリを設定
+WORKDIR /app
+
+# ビルド成果物と依存関係をコピー
+COPY --from=builder /app/package.json /app/package-lock.json ./
+COPY --from=builder /app/.next ./.next
+COPY --from=builder /app/public ./public
+
+# 依存関係のインストール（本番環境用）
+RUN npm install --only=production
+
+# Next.jsアプリケーションを起動
+CMD ["npm", "run", "start"]
