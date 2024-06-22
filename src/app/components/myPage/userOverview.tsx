@@ -7,7 +7,7 @@ const UserOverview = async ({ user }: { user: User }) => {
   const { name, photoURL  } = user
 
   return (
-    <div className="pb-[40px] pt-[100px] lg:border-b-2">
+    <div className="lg:border-b-2 lg:pb-[40px] lg:pt-[100px]">
       <div>
         <Avatar className="mx-auto size-24">
           <AvatarImage src={photoURL} className="size-24" />
