@@ -1,10 +1,10 @@
 "use client"
-import React, { useState } from "react";
+import React, { Dispatch, SetStateAction, useState } from "react";
 
-import AllTechsList from "@/app/components/selectPage/allTechListSection";
-import SubmitButton from "@/app/components/selectPage/submitButton";
+import AllTechsList from "../selectPage/allTechListSection";
+import SubmitButton from "../selectPage/submitButton";
 
-const SelectPage = () => {
+const Select = ({setScene} : {setScene: Dispatch<SetStateAction<number>>}) => {
   const allSections = [
     {
       name: "web",
@@ -36,10 +36,10 @@ const SelectPage = () => {
       }
     });
   };
-
+  
   const handleSubmit = () => {
-    localStorage.setItem("selectedTechs", JSON.stringify(selectedTechs));
     // ゲーム画面に遷移するロジックを追加
+    setScene(1);
   };
 
   return (
@@ -61,4 +61,4 @@ const SelectPage = () => {
   );
 }
 
-export default SelectPage;
+export default Select;
