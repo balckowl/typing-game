@@ -24,7 +24,7 @@ export default function RootLayout({
       <SessionProvider>
         <body className={inter.className}>
           <Header/>
-          <main className="min-h-[calc(100vh-80px-160px)]">
+          <main className="min-h-[calc(100vh-80px-80px)]">
             {children}
           </main>
           <Footer/>
