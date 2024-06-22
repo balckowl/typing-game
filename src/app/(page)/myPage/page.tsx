@@ -1,8 +1,8 @@
 import { redirect } from "next/navigation";
 import { getServerSession } from "next-auth/next"
 
+import StartBtn from "@/app/components/myPage/BtnGroup";
 import Profile from "@/app/components/myPage/profile/profile";
-import StartBtn from "@/app/components/myPage/startBtn";
 import UserOverview from "@/app/components/myPage/userOverview";
 import Footer from "@/app/layout/footer/footer";
 import Header from "@/app/layout/header/header";
