@@ -25,12 +25,12 @@ const SiginInWithGoogleBtn = () => {
             const userDoc = await getDoc(userDocRef);
 
             if (!userDoc.exists() && displayName && email && photoURL) {
-                await createUser(uid, displayName, email, photoURL)
                 await setDoc(userDocRef, {
                     name: displayName,
                     email: email,
                     photoURL: photoURL,
                 });
+                await createUser(uid, displayName, email, photoURL)
             }
 
             signIn("credentials", { callbackUrl: '/myPage', idToken })

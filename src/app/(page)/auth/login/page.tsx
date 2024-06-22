@@ -3,7 +3,6 @@ import Image from "next/image"
 import SiginInWithGoogleBtn from "@/app/components/auth/siginInWithGoogleBtn"
 
 const Login = async () => {
-
     return (
         <div className="container mx-auto h-[calc(100vh-80px-80px)]">
             <div className="flex h-full items-center justify-center">
