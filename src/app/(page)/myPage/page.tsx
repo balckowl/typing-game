@@ -23,7 +23,7 @@ const myPage = async () => {
   return (
     <div className="mx-auto w-4/5 max-w-[1200px]">
       {user && (
-        <div className="flex flex-col justify-between gap-20 lg:flex-row">
+        <div className="flex flex-col justify-between lg:flex-row">
           <div className="hidden w-3/12 lg:block lg:pl-[100px]"></div>
           <div className="mx-auto mt-20 size-max lg:fixed lg:w-3/12 lg:pl-[100px]">
             <UserOverview user={user}/>

@@ -17,13 +17,13 @@ const Profile = async ({ user }: { user: User }) => {
   const rankScore = [0, 10000, 20000, 30000, 40000, 50000, 60000]
   const rankName = ["E","D","C","B","A","S","SS"]
   const ranks = [
-    ["SS", `${rankName[6]}~`],
-    ["S", `${rankName[5]}~`],
-    ["A", `${rankName[4]}~`],
-    ["B", `${rankName[3]}~`],
-    ["C", `${rankName[2]}~`],
-    ["D", `${rankName[1]}~`],
-    ["E", `${rankName[0]}~`]
+    ["SS", `${rankScore[6]}~`],
+    ["S", `${rankScore[5]}~`],
+    ["A", `${rankScore[4]}~`],
+    ["B", `${rankScore[3]}~`],
+    ["C", `${rankScore[2]}~`],
+    ["D", `${rankScore[1]}~`],
+    ["E", `${rankScore[0]}~`]
   ];
 
   const getRank = (score: number) => {
