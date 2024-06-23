@@ -29,6 +29,7 @@ export default async function Home() {
             className="h-[80vh] w-full object-cover"
             width="1000"
             height="500"
+            priority
           />
           <About />
           <HowToPlay />
