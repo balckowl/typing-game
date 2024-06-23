@@ -9,10 +9,12 @@ const Select = ({
   selectedTechs,
   setScene,
   setSelectedTechs,
+  setWordList
 }: {
   selectedTechs: string[],
   setScene: Dispatch<SetStateAction<number>>,
   setSelectedTechs: Dispatch<SetStateAction<string[]>>,
+  setWordList: Dispatch<SetStateAction<string[]>>
 }) => {
   const allSections = [
     {
@@ -36,7 +38,7 @@ const Select = ({
         "PHP",
         "Laravel",
         "Node.js",
-        "Nest.js","C",
+        "Nest.js", "C",
         "C++",
         "C#",
         "Python",
@@ -60,7 +62,23 @@ const Select = ({
     });
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
+
+    //ここで技術を生成する
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/aws`,
+      {
+        body: JSON.stringify({ selectedTechs }),
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        method: "POST",
+      }
+    )
+    const data = await res.json()
+
+    //wordListに技術ワードを格納する
+    console.log(JSON.parse(data.responseText))
+    setWordList(JSON.parse(data.responseText))
     // ゲーム画面に遷移する
     setScene(1);
   };
@@ -70,19 +88,19 @@ const Select = ({
       <div className="mb-8 max-w-[600px] rounded-2xl bg-white p-4 shadow-md">
         <div className="flex justify-between">
 
-        <h2 className="mb-4 text-2xl">
-          好きな技術<span>(5つまで)</span>
-        </h2>
-        <div>
-        <Button 
-          onClick={handleSubmit} 
-          className="w-[100px] rounded-xl bg-[#6AE88D] text-xl text-white shadow-md"
-          disabled={selectedTechs.length == 0}
-        >
-          決定
-        </Button>
+          <h2 className="mb-4 text-2xl">
+            好きな技術<span>(5つまで)</span>
+          </h2>
+          <div>
+            <Button
+              onClick={handleSubmit}
+              className="w-[100px] rounded-xl bg-[#6AE88D] text-xl text-white shadow-md"
+              disabled={selectedTechs.length == 0}
+            >
+              決定
+            </Button>
+          </div>
         </div>
-      </div>
         <AllTechsList
           allSections={allSections}
           onTechClick={handleTechClick}
