@@ -3,7 +3,7 @@ import React, { Dispatch, SetStateAction } from "react";
 
 import { Button } from "@/components/ui/button";
 
-import AllTechsList from "../selectPage/allTechListSection";
+import AllTechsList from "./allTechListSection";
 
 const Select = ({
   selectedTechs,
