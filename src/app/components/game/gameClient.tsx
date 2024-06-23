@@ -28,7 +28,7 @@ const GameClient = () => {
 
   // 各配列を結合して一つの配列にする
   const words = [...htmlCssWords, ...javascriptWords, ...goWords, ...gitWords];
-  const [wordList, setWordList] = useState<string[]>(words);
+  const [wordList, setWordList] = useState<string[]>(words)
   
   // 制限時間
   const timeLimit = 60;
