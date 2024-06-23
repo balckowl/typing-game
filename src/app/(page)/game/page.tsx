@@ -2,7 +2,6 @@ import { redirect } from "next/navigation"
 import { getServerSession } from "next-auth"
 
 import GameClient from "@/app/components/game/gameClient"
-import { getUser } from "@/data/user"
 import { authOptions } from "@/lib/next-auth/options"
 
 const Game = async () => {
@@ -14,13 +13,9 @@ const Game = async () => {
     redirect("/auth/login")
   }
 
-  const user = await getUser(session.user.uid)
-
   return (
     <div>
-      {user && (
-        <GameClient />
-      )}
+      <GameClient />
     </div>
   )
 }

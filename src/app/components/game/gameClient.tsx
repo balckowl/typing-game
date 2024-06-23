@@ -31,6 +31,7 @@ const GameClient = () => {
           setScene={setScene}
           setSelectedTechs={setSelectedTechs}
           selectedTechs={selectedTechs}
+          setWordList={setWordList}
         />
       }
       {scene >= 1 &&
